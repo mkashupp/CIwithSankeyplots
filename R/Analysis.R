@@ -8,7 +8,12 @@ creatData <- function(datalenght=5 )
   return <- raw.data
 }
 
-sumamrizeData <- fucntion( rdata )
+sumamrizeData <- function( rdata )
 {
   print(rdata)
+}
+
+myPrint <- function()
+{
+  return(5)
 }
