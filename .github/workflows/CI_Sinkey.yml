@@ -30,13 +30,12 @@ jobs:
       run: R -e 'install.packages(c("lintr", "testthat", "remotes"))'
 
     - name: Verify Packages
-      run: |
-        R -e 'library(testthat)'
-        R -e 'library(lintr)'
+      run:  R -e 'library(testthat)'
+#        R -e 'library(lintr)'
 #        R -e 'library(devtools)'
 #        R -e 'packageVersion("devtools")'
-        R -e 'packageVersion("testthat")'
-        R -e 'packageVersion("lintr")'
+#        R -e 'packageVersion("testthat")'
+#        R -e 'packageVersion("lintr")'
 
     - name: Lint R Code
       run: Rscript Lint.R
