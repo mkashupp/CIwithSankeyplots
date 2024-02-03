@@ -3,7 +3,7 @@
 library(testthat)
 source("../R/Analysis.R")
 # Define unit tests
-test_that("add_numbers adds numbers correctly", {
+test_that("add_numbers adds numbers and correctly", {
   expect_equal( myPrint(), 5)
 })
 
