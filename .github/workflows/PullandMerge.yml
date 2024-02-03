@@ -13,34 +13,34 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # - name: Create Pull Request
-      #   run: |
-      #     git checkout -b feature-branch
-      #     git add .
-      #     git commit -m "New feature added"
-      #     git push origin feature-branch
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #
-      # - name: Merge Pull Request
-      #   uses: actions/github-script@0.7.0
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     script: |
-      #       const { data: pullRequests } = await github.pulls.list({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         state: 'open'
-      #       });
-      #
-      #       const pullRequest = pullRequests.find(pr => pr.head.ref === 'feature-branch');
-      #       if (!pullRequest) {
-      #         core.setFailed('Pull request not found');
-      #         return;
-      #       }
-      #
-      #       await github.pulls.merge({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         pull_number: pullRequest.number
-      #       });
+      - name: Create Pull Request
+        run: |
+          git checkout -b feature/Update-analysis
+          git add .
+          git commit -m "New feature added"
+          git push origin feature/Update-analysis
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+
+      - name: Merge Pull Request
+        uses: actions/github-script@0.7.0
+        with:
+          github-token: ${{ secrets.G_TOKEN }}
+          script: |
+            const { data: pullRequests } = await github.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+
+            const pullRequest = pullRequests.find(pr => pr.head.ref === 'feature/Update-analysis');
+            if (!pullRequest) {
+              core.setFailed('Pull request not found');
+              return;
+            }
+
+            await github.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pullRequest.number
+            });
