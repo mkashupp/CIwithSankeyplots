@@ -21,3 +21,8 @@ jobs:
     - name: Verify R Version
       run: R --version
 
+    - name: Install Package Dependencies
+      run: |
+        R -e 'install.packages("devtools")'
+        R -e 'devtools::install_deps(dependencies = TRUE)'
+
