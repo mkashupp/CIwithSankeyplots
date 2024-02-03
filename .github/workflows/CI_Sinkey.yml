@@ -25,21 +25,22 @@ jobs:
 #      run: |
 #        R -e 'install.packages(c("usethis", "pkgdown", "rcmdcheck", "rversions", "urlchecker"))'
 
-#ok    - name: Install Devtools and its Dependencies
-#ok      run: |
-#ok        R -e 'install.packages("devtools")'
+    - name: Install Devtools and its Dependencies
+      run: |
+        R -e 'install.packages("devtools")'
 #        R -e 'devtools::install_deps(dependencies = TRUE)'
 
     - name: Install lintr and testthat
       run: R -e 'install.packages(c("lintr", "testthat", "remotes"))'
 
     - name: Verify Packages
-      run: R -e 'library(testthat)'
-#      R -e 'library(lintr)'
-#        R -e 'packageVersion("devtools")'
-#        R -e 'library(devtools)'
-#      R -e 'packageVersion("testthat")'
-#      R -e 'packageVersion("lintr")'
+      run: |
+        R -e 'library(testthat)'
+        R -e 'library(lintr)'
+        R -e 'library(devtools)'
+        R -e 'packageVersion("devtools")'
+        R -e 'packageVersion("testthat")'
+        R -e 'packageVersion("lintr")'
 #        R -e 'devtools::test()'
 
     - name: Lint R Code
