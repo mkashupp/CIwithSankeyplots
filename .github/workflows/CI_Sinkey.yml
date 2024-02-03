@@ -7,8 +7,7 @@ on:
 
 jobs:
   setup-r:
-    runs-on: macos-latest
-#    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
@@ -52,38 +51,94 @@ jobs:
 #    - name: Set up Docker Buildx
 #      uses: docker/setup-buildx-action@v1
 
-    - name: Install Docker
-      run: brew install --cask docker
 
-    - name: Check Docker Status
-      run: docker info
-
-    - name: Install Docker Buildx
-      run: |
-        docker run --privileged --rm tonistiigi/binfmt --install all
-        docker buildx create --name mybuilder
-        docker buildx use mybuilder
-
-# - name: Docker Login
-    #   uses: docker/login-action@v2
-    #   with:
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
-
-#    - name: Login to Docker Hub
-#      uses: docker/login-action@v1
-#      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-#      env:
-#        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-#        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Log in to Docker Hub
-#      #uses: docker/login-action@v1
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-
-
-
-    - name: Build and oush the docker image
-      run: |
-        docker buildx build -t mkashupp/sankyplot:latest .
-        docker push mkashupp/sankyplot:latest
+#Follwoing code works well untiill before docker building
+# name: R Package CI
+#
+# on:
+#   push:
+#     branches:
+#       - main
+#
+# jobs:
+#   setup-r:
+#     runs-on: macos-latest
+# #    runs-on: ubuntu-latest
+#
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v2
+#
+#     - name: Set up R
+#       uses: r-lib/actions/setup-r@v2
+#       with:
+#         r-version: '4.2.3'
+#
+#     - name: Verify R Version
+#       run: R --version
+#
+# #    - name: Install devtools dependencies
+# #      run: |
+# #        R -e 'install.packages(c("usethis", "pkgdown", "rcmdcheck", "rversions", "urlchecker"))'
+#
+# #ok    - name: Install Devtools and its Dependencies
+# #ok      run: |
+# #ok        R -e 'install.packages("devtools")'
+# #        R -e 'devtools::install_deps(dependencies = TRUE)'
+#
+#     - name: Install lintr and testthat
+#       run: R -e 'install.packages(c("lintr", "testthat", "remotes"))'
+#
+#     - name: Verify Packages
+#       run: R -e 'library(testthat)'
+# #      R -e 'library(lintr)'
+# #        R -e 'packageVersion("devtools")'
+# #        R -e 'library(devtools)'
+# #      R -e 'packageVersion("testthat")'
+# #      R -e 'packageVersion("lintr")'
+# #        R -e 'devtools::test()'
+#
+#     - name: Lint R Code
+#       run: Rscript Lint.R
+#
+#     - name: Run Unit Tests
+#       run: R -e 'testthat::test_dir("tests")'
+#
+# #    - name: Set up Docker Buildx
+# #      uses: docker/setup-buildx-action@v1
+#
+#     - name: Install Docker
+#       run: brew install --cask docker
+#
+#     - name: Check Docker Status
+#       run: docker info
+#
+#     - name: Install Docker Buildx
+#       run: |
+#         docker run --privileged --rm tonistiigi/binfmt --install all
+#         docker buildx create --name mybuilder
+#         docker buildx use mybuilder
+#
+# # - name: Docker Login
+#     #   uses: docker/login-action@v2
+#     #   with:
+#     #     username: ${{ secrets.DOCKER_USERNAME }}
+#     #     password: ${{ secrets.DOCKER_PASSWORD }}
+#
+# #    - name: Login to Docker Hub
+# #      uses: docker/login-action@v1
+# #      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+# #      env:
+# #        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+# #        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+#
+#     - name: Log in to Docker Hub
+# #      #uses: docker/login-action@v1
+#       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+#
+#
+#
+#     - name: Build and oush the docker image
+#       run: |
+#         docker buildx build -t mkashupp/sankyplot:latest .
+#         docker push mkashupp/sankyplot:latest
