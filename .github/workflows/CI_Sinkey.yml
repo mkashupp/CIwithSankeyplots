@@ -36,12 +36,12 @@ jobs:
 
     - name: Verify Packages
       run: |
-#        R -e 'library(devtools)'
-        R -e 'library(testthat)'
-        R -e 'library(lintr)'
+      R -e 'library(testthat)'
+      R -e 'library(lintr)'
 #        R -e 'packageVersion("devtools")'
-        R -e 'packageVersion("testthat")'
-        R -e 'packageVersion("lintr")'
+#        R -e 'library(devtools)'
+      R -e 'packageVersion("testthat")'
+      R -e 'packageVersion("lintr")'
 #        R -e 'devtools::test()'
 
     - name: Run Unit Tests
