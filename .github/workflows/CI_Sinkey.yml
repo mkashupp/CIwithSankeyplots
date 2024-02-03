@@ -55,6 +55,9 @@ jobs:
     - name: Install Docker
       run: brew install --cask docker
 
+    - name: Check Docker Status
+      run: docker info
+
     - name: Install Docker Buildx
       run: |
         docker run --privileged --rm tonistiigi/binfmt --install all
