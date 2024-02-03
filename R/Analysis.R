@@ -13,7 +13,7 @@ sumamrizeData <- function( rdata )
   print(rdata)
 }
 
-myPrint <- function()
+function1 <- function()
 {
   return(5)
 }
