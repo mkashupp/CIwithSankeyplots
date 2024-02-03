@@ -43,5 +43,8 @@ jobs:
 #      R -e 'packageVersion("lintr")'
 #        R -e 'devtools::test()'
 
+    - name: Lint R Code
+      run: Rscript Lint.R
+
     - name: Run Unit Tests
       run: R -e 'testthat::test_dir("tests")'
