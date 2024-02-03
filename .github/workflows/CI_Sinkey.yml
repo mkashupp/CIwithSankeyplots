@@ -48,8 +48,16 @@ jobs:
     - name: Run Unit Tests
       run: R -e 'testthat::test_dir("tests")'
 
-#    - name: Set up Docker Buildx
-#      uses: docker/setup-buildx-action@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+    - name: Build Docker image
+      run: |
+        docker build -t mkashupp/sankeyplot .
+        docker push mkashupp/sankeyplot
 
 
 #Follwoing code works well untiill before docker building
