@@ -1,0 +1,27 @@
+name: R Package CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v1
+      with:
+        r-version: '4.2.3'
+
+    - name: Install Package Dependencies
+      run: |
+        R -e 'install.packages("devtools")'
+        R -e 'devtools::install_deps(dependencies = TRUE)'
+
+    - name: Run R CMD check
+      run: R CMD check .
