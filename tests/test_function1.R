@@ -8,3 +8,6 @@ test_that("add_numbers adds numbers and correctly", {
 })
 
 # Add more unit tests as needed
+test_that("add_numbers adds numbers and correctly", {
+  expect_equal( nrow(creatData(5)), 5)
+})
