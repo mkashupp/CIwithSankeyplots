@@ -34,4 +34,4 @@ jobs:
     - name: Run Tests
       run: |
         R -e 'library(devtools)'
-#        R -e 'devtools::test()'
+        R -e 'devtools::test()'
