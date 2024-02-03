@@ -74,5 +74,5 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t mkashupp/SankyPlot:latest .
-        docker push mkashupp/SankyPlot:latest
+        docker build -t mkashupp/sankyplot:latest .
+        docker push mkashupp/sankyplot:latest
