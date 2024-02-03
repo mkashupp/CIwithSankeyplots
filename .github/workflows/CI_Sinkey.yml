@@ -72,7 +72,10 @@ jobs:
 #      #uses: docker/login-action@v1
       run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-    - name: Build and Push Docker Image
+    - name: Install docker buildx
+      run: docker buildx install
+
+    - name: Build and oush the docker image
       run: |
-        docker build -t mkashupp/sankyplot:latest .
+        docker buildx build -t mkashupp/sankyplot:latest .
         docker push mkashupp/sankyplot:latest
