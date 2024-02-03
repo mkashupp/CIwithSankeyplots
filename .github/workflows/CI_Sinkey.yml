@@ -21,14 +21,10 @@ jobs:
     - name: Verify R Version
       run: R --version
 
-#    - name: Install devtools dependencies
+# Devtools are only working with the runs-on: macos-latest and not ubuntu-latest
+#    - name: Install Devtools and its Dependencies
 #      run: |
-#        R -e 'install.packages(c("usethis", "pkgdown", "rcmdcheck", "rversions", "urlchecker"))'
-
-    - name: Install Devtools and its Dependencies
-      run: |
-        R -e 'install.packages("devtools")'
-#        R -e 'devtools::install_deps(dependencies = TRUE)'
+#        R -e 'install.packages("devtools")'
 
     - name: Install lintr and testthat
       run: R -e 'install.packages(c("lintr", "testthat", "remotes"))'
@@ -37,11 +33,10 @@ jobs:
       run: |
         R -e 'library(testthat)'
         R -e 'library(lintr)'
-        R -e 'library(devtools)'
-        R -e 'packageVersion("devtools")'
+#        R -e 'library(devtools)'
+#        R -e 'packageVersion("devtools")'
         R -e 'packageVersion("testthat")'
         R -e 'packageVersion("lintr")'
-#        R -e 'devtools::test()'
 
     - name: Lint R Code
       run: Rscript Lint.R
@@ -49,6 +44,8 @@ jobs:
     - name: Run Unit Tests
       run: R -e 'testthat::test_dir("tests")'
 
+# Docker build dont work with the macos-latest and only working with the ubuntu-latest
+# See the commented code below that shows after many tries it was not configured.
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
